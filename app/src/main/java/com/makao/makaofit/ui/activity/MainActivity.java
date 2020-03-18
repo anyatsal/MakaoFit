@@ -1,7 +1,8 @@
 package com.makao.makaofit.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,7 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.tasks.Task;
 import com.makao.makaofit.R;
 import com.makao.makaofit.service.GoogleFitService;
 
@@ -18,43 +24,55 @@ public class MainActivity extends AppCompatActivity {
 
     final int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = System.identityHashCode(this) & 0xFFFF;
 
+    private SharedPreferences preferences;
     private FitnessOptions fitnessOptions;
+    private GoogleFitService googleFitService;
+    private GoogleSignInOptions gso;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GoogleFitService googleFitService = new GoogleFitService();
+        Scope bodyScope = new Scope("https://www.googleapis.com/auth/fitness.body.read");
+        Scope activityScope = new Scope("https://www.googleapis.com/auth/fitness.activity.read");
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestScopes(bodyScope, activityScope)
+                .build();
+
+        googleFitService = new GoogleFitService();
         fitnessOptions = googleFitService.getFitnessOptions();
+        preferences = getSharedPreferences("info", MODE_PRIVATE);
 
         if (oAuthPermissionApproved()) {
             next();
         }
     }
 
-    private void signIn() {
-        if (!oAuthPermissionApproved()) {
-            GoogleSignIn.requestPermissions(
-                    this,
-                    GOOGLE_FIT_PERMISSIONS_REQUEST_CODE,
-                    getGoogleAccount(),
-                    fitnessOptions);
-        } else {
-            next();
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == GOOGLE_FIT_PERMISSIONS_REQUEST_CODE) {
+        if (requestCode == GOOGLE_FIT_PERMISSIONS_REQUEST_CODE) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            getProfileInformation(account);
             next();
+        } catch (ApiException e) {
+            e.printStackTrace();
         }
     }
 
     private boolean oAuthPermissionApproved() {
-        return GoogleSignIn.hasPermissions(getGoogleAccount(), fitnessOptions);
+        return GoogleSignIn.getLastSignedInAccount(this) != null;
     }
 
     private GoogleSignInAccount getGoogleAccount() {
@@ -68,6 +86,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        signIn();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, GOOGLE_FIT_PERMISSIONS_REQUEST_CODE);
+    }
+
+    private void getProfileInformation(GoogleSignInAccount account) {
+        if (account != null) {
+            SharedPreferences.Editor editor = preferences.edit();
+
+            editor.putString("username", account.getDisplayName());
+            editor.putString("email", account.getEmail());
+
+            Uri photoUrl = account.getPhotoUrl();
+            if (photoUrl != null) {
+                editor.putString("photoUrl", photoUrl.toString());
+            }
+            editor.apply();
+        }
     }
 }
