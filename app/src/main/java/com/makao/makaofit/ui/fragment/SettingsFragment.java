@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment;
 
 import com.makao.makaofit.R;
 
-public class ProfileFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
+    public static SettingsFragment newInstance() {
+        return new SettingsFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 }

@@ -13,7 +13,11 @@ import androidx.fragment.app.Fragment;
 import com.makao.makaofit.R;
 import com.makao.makaofit.service.GoogleFitService;
 
-public class StatisticFragment extends Fragment {
+public class StatisticsFragment extends Fragment {
+
+    public static StatisticsFragment newInstance() {
+        return new StatisticsFragment();
+    }
 
     @Nullable
     @Override

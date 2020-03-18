@@ -50,4 +50,7 @@ dependencies {
 
     // Biometrics
     implementation 'co.infinum:goldfinger:2.0.0-RC2'
+
+    // Circle images
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

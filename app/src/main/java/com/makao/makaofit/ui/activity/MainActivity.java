@@ -1,5 +1,6 @@
 package com.makao.makaofit.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
                     getGoogleAccount(),
                     fitnessOptions);
         } else {
+            next();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == GOOGLE_FIT_PERMISSIONS_REQUEST_CODE) {
             next();
         }
     }

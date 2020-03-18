@@ -9,11 +9,6 @@ import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.FitnessOptions;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
-import com.google.android.gms.fitness.request.DataReadRequest;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class GoogleFitService {
 
@@ -21,7 +16,7 @@ public class GoogleFitService {
     private final FitnessOptions fitnessOptions = FitnessOptions.builder()
             .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
             .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-            .addDataType (DataType.TYPE_STEP_COUNT_CUMULATIVE, FitnessOptions.ACCESS_READ)
+            .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE, FitnessOptions.ACCESS_READ)
             .build();
 
     public void setStepsCount(Context context, TextView view) {
@@ -29,7 +24,7 @@ public class GoogleFitService {
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(dataReadResponse -> {
                     if (!dataReadResponse.isEmpty()) {
-                        view.setText(dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString() + " Steps" + "\n" + "Wooooooow!" );
+                        view.setText(String.format("%s Steps\nWooooooow!", dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString()));
                     }
                 })
                 .addOnFailureListener(e -> {
