@@ -74,11 +74,7 @@ public class ProfileFragment extends Fragment {
         emailView.setText(preferences.getString("email", ""));
 
         String photoUrl = preferences.getString("photoUrl", "");
-        if (!photoUrl.equals("")) {
-            Picasso.with(getContext()).load(photoUrl).into(photoView);
-        } else {
-            Picasso.with(getContext()).load("https://www.peramoga.by/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png").into(photoView);
-        }
+        Picasso.with(getContext()).load(photoUrl).into(photoView);
 
         googleFitService.setHeight(getContext(), heightView);
         googleFitService.setWeight(getContext(), weightView);

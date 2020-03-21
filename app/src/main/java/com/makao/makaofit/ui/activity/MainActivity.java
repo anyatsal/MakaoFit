@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .requestScopes(bodyScope, activityScope)
+                .requestIdToken("210497297826-q2dhqv3t6fhmm0q8e7es1mcf4h7uoj75.apps.googleusercontent.com")
                 .build();
 
         googleFitService = new GoogleFitService();
