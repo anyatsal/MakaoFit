@@ -48,7 +48,7 @@
 ![Структурная схема](https://raw.githubusercontent.com/anyatsal/MakaoFit/master/Architecture/To%20Be.jpg) 
 
 ## 2. <a name="analysis">Анализ архитектуры</a> 
-![Диаграмма классов](https://raw.githubusercontent.com/anyatsal/MakaoFit/master/Architecture/Class%20Diagram.png) 
+![Диаграмма классов](https://raw.githubusercontent.com/anyatsal/MakaoFit/master/Architecture/Class%20Diagram.jpg) 
   
 ## 3. <a name="conclusion">Сравнениие и рефакторинг</a>
 
