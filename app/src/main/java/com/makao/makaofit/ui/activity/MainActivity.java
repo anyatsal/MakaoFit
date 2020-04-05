@@ -34,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Scope bodyScope = new Scope("https://www.googleapis.com/auth/fitness.body.read");
+        Scope bodyScopeRead = new Scope("https://www.googleapis.com/auth/fitness.body.read");
+        Scope bodyScopeWrite = new Scope("https://www.googleapis.com/auth/fitness.body.write");
         Scope activityScope = new Scope("https://www.googleapis.com/auth/fitness.activity.read");
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
-                .requestScopes(bodyScope, activityScope)
-                .requestIdToken("210497297826-q2dhqv3t6fhmm0q8e7es1mcf4h7uoj75.apps.googleusercontent.com")
+                .requestScopes(bodyScopeRead, bodyScopeWrite, activityScope)
+                .requestIdToken("267312481442-hkkbrbacki7kkoc6ctoek3mfcao7g2p3.apps.googleusercontent.com")
                 .build();
 
         googleFitService = new GoogleFitService();

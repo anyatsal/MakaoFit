@@ -5,9 +5,13 @@
     <string name="settings">Settings</string>
     <string name="get_started">Get started</string>
     <string name="height">Height</string>
+    <string name="height_edit">Height(m):</string>
     <string name="weight">Weight</string>
+    <string name="weight_edit">Weight(kg):</string>
+    <string name="email">Email</string>
     <string name="email_hint">aaa@gmail.com</string>
     <string name="name">Name</string>
     <string name="birthday">Birthday</string>
     <string name="logout">Logout</string>
+    <string name="save_button">Save</string>
 </resources>

@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.makao.makaofit.R;
 import com.makao.makaofit.service.GoogleFitService;
+import com.makao.makaofit.ui.activity.EditProfileActivity;
 import com.makao.makaofit.ui.activity.MainActivity;
 import com.squareup.picasso.Picasso;
 
@@ -81,5 +82,11 @@ public class ProfileFragment extends Fragment {
 
         Button button = view.findViewById(R.id.btn_logout);
         button.setOnClickListener(listener -> logout());
+
+        Button editButton = view.findViewById(R.id.edit_profile_button);
+        editButton.setOnClickListener(listener -> {
+            Intent intent = new Intent(this.getActivity(), EditProfileActivity.class);
+            startActivity(intent);
+        });
     }
 }
