@@ -15,4 +15,6 @@
     <string name="logout">Logout</string>
     <string name="gender">Gender</string>
     <string name="save_button">Save</string>
+    <string name="callories">Callories:</string>
+    <string name="distance">Distance:</string>
 </resources>

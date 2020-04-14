@@ -34,8 +34,12 @@ public class HomeFragment extends Fragment {
     private void initView(View view) {
         Button stepsButton = view.findViewById(R.id.steps);
         TextView distance = view.findViewById(R.id.distance);
+        TextView textView = view.findViewById(R.id.kkal);
+
         googleFitService.setStepsCount(getContext(), stepsButton, distance);
         stepsButton.setOnClickListener(listener -> googleFitService.setStepsCount(getContext(), stepsButton, distance));
+
+        googleFitService.setCallories(getContext(), textView);
 
     }
 }
