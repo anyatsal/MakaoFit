@@ -5,7 +5,14 @@
 
     <TextView
         android:id="@+id/steps_count"
-        android:textSize="40px"
+        android:textSize="40sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </TextView>
+
+    <TextView
+        android:id="@+id/distance"
+        android:textSize="40sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </TextView>

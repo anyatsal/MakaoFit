@@ -41,6 +41,7 @@
             tools:text="440kkal" />
 
         <TextView
+            android:id="@+id/distance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -49,8 +50,6 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/distance"
-            app:layout_constraintTop_toBottomOf="@+id/steps"
             tools:text="2.0km" />
     </LinearLayout>
 
