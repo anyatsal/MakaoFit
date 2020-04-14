@@ -28,12 +28,13 @@ public class GoogleFitService {
             .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
             .build();
 
-    public void setStepsCount(Context context, TextView view) {
+    public void setStepsCount(Context context, TextView view, TextView distance) {
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(dataReadResponse -> {
                     if (!dataReadResponse.isEmpty()) {
                         view.setText(String.format("%s Steps\nWooooooow!", dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString()));
+                        distance.setText(String.format("%s km", (dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asFloat()/1400)));
                     }
                 })
                 .addOnFailureListener(e -> {

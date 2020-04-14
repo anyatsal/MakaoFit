@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -32,7 +33,9 @@ public class HomeFragment extends Fragment {
 
     private void initView(View view) {
         Button stepsButton = view.findViewById(R.id.steps);
-        googleFitService.setStepsCount(getContext(), stepsButton);
-        stepsButton.setOnClickListener(listener -> googleFitService.setStepsCount(getContext(), stepsButton));
+        TextView distance = view.findViewById(R.id.distance);
+        googleFitService.setStepsCount(getContext(), stepsButton, distance);
+        stepsButton.setOnClickListener(listener -> googleFitService.setStepsCount(getContext(), stepsButton, distance));
+
     }
 }
