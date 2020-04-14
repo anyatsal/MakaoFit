@@ -77,10 +77,6 @@ public class MainActivity extends AppCompatActivity {
         return GoogleSignIn.getLastSignedInAccount(this) != null;
     }
 
-    private GoogleSignInAccount getGoogleAccount() {
-        return GoogleSignIn.getAccountForExtension(this, fitnessOptions);
-    }
-
     private void next() {
         Intent intent = new Intent(this, AppActivity.class);
         startActivity(intent);

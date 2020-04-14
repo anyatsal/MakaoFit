@@ -42,13 +42,7 @@ public class GoogleFitService {
     }
 
     public void setWeight(Context context, TextView view) {
-        Calendar calendar = Calendar.getInstance();
-
-        DataReadRequest dataReadRequest = new DataReadRequest.Builder()
-                .read(DataType.TYPE_WEIGHT)
-                .setTimeRange(1, calendar.getTimeInMillis(), TimeUnit.MILLISECONDS)
-                .setLimit(1)
-                .build();
+        DataReadRequest dataReadRequest = createDataReadRequest(DataType.TYPE_WEIGHT);
 
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readData(dataReadRequest)
@@ -64,13 +58,7 @@ public class GoogleFitService {
     }
 
     public void setHeight(Context context, TextView view) {
-        Calendar calendar = Calendar.getInstance();
-
-        DataReadRequest dataReadRequest = new DataReadRequest.Builder()
-                .read(DataType.TYPE_HEIGHT)
-                .setTimeRange(1, calendar.getTimeInMillis(), TimeUnit.MILLISECONDS)
-                .setLimit(1)
-                .build();
+        DataReadRequest dataReadRequest = createDataReadRequest(DataType.TYPE_HEIGHT);
 
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readData(dataReadRequest)
@@ -82,6 +70,25 @@ public class GoogleFitService {
                 })
                 .addOnFailureListener(e -> {
                     Log.w(TAG, "There was a problem getting the height.", e);
+                });
+    }
+
+    public void setCallories(Context context, TextView view) {
+        DataReadRequest dataReadRequest = createDataReadRequest(DataType.TYPE_CALORIES_EXPENDED);
+
+        Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
+                .readData(dataReadRequest)
+                .addOnSuccessListener(dataReadResponse -> {
+                    if(dataReadResponse.getStatus().isSuccess()) {
+                        String callories = dataReadResponse.getDataSet(DataType.TYPE_CALORIES_EXPENDED).getDataPoints().get(0)
+                                .getValue(Field.FIELD_CALORIES).toString();
+                        double kiloCall = Double.parseDouble(callories) * 30;
+                        Long roundedKilloCal = Math.round(kiloCall);
+                        view.setText(roundedKilloCal.toString() + " kCall");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.w(TAG, "There was a problem getting the callories.", e);
                 });
     }
 
@@ -107,11 +114,9 @@ public class GoogleFitService {
 
     public void updateWeight(Context context, String weight) {
         Calendar cal = Calendar.getInstance();
-        Date now = new Date();
-        cal.setTime(now);
-        cal.add(Calendar.MINUTE, 0);
+        cal.setTime(new Date());
         long endTime = cal.getTimeInMillis();
-        cal.add(Calendar.MINUTE, -50);
+        cal.add(Calendar.HOUR, -12);
         long startTime = cal.getTimeInMillis();
 
 
@@ -139,6 +144,21 @@ public class GoogleFitService {
         DataPoint dataPoint = builder.build();
 
         return DataSet.builder(dataSource).add(dataPoint).build();
+    }
+
+    private DataReadRequest createDataReadRequest(DataType dataType) {
+        Calendar cal = Calendar.getInstance();
+        Date now = new Date();
+        cal.setTime(now);
+        cal.add(Calendar.MINUTE, 0);
+        long endTime = cal.getTimeInMillis();
+        cal.add(Calendar.HOUR, -24);
+        long startTime = cal.getTimeInMillis();
+
+        return new DataReadRequest.Builder()
+                .read(dataType)
+                .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+                .build();
     }
 
     private void processUpdateRequest(Context context, DataUpdateRequest request) {
