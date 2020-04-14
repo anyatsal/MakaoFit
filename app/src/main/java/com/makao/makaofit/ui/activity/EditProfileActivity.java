@@ -14,9 +14,6 @@ import com.makao.makaofit.service.GoogleFitService;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private final String HEIGHT_PATTERN = "^[01][.,][0-9]{1,3}$";
-    private final String WEIGHT_PATTERN = "^[1-9][0-9]{1,2}[.,][0-9]{1,3}$";
-
     private GoogleFitService googleFitService;
     private EditText heightView;
     private EditText weightView;
@@ -37,12 +34,13 @@ public class EditProfileActivity extends AppCompatActivity {
         String weight = weightView.getText().toString();
 
         if (!isEmpty(height) || !isEmpty(weight)) {
-            if (isValidHeight(height)) {
+            if (isValid(height)) {
                 googleFitService.updateHeight(this, height);
             }
-            if (isValidWeight(weight)) {
+            if (isValid(weight)) {
                 googleFitService.updateWeight(this, weight);
             }
+            finish();
         } else {
             Toast.makeText(this, "Although one field must be filled!", Toast.LENGTH_LONG).show();
         }
@@ -54,26 +52,15 @@ public class EditProfileActivity extends AppCompatActivity {
         finish();
     }
 
-    private boolean isValidHeight(String height) {
-        if (!isEmpty(height)) {
-            boolean isValid = height.matches(HEIGHT_PATTERN);
-
-            if (isValid)
+    private boolean isValid(String temp) {
+        if (!isEmpty(temp)) {
+            try {
+                float var = Float.parseFloat(temp);
                 return true;
-            else
+            } catch (Exception e) {
                 heightView.setError("Not valid!");
-        }
-        return false;
-    }
-
-    private boolean isValidWeight(String weight) {
-        if (!isEmpty(weight)) {
-            boolean isValid = weight.matches(WEIGHT_PATTERN);
-
-            if (isValid)
-                return true;
-            else
-                weightView.setError("Not valid!");
+                return false;
+            }
         }
         return false;
     }
