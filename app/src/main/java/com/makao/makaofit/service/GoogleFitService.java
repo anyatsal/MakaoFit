@@ -30,13 +30,17 @@ public class GoogleFitService {
 //             .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
             .build();
 
-    public void setStepsCount(Context context, TextView view, TextView distance) {
+    public void setStepsCount(Context context, TextView view, TextView distanceView) {
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(dataReadResponse -> {
                     if (!dataReadResponse.isEmpty()) {
-                        view.setText(String.format("%s Steps\nWooooooow!", dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString()));
-                        distance.setText(String.format("%s km", (dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asFloat()/1400)));
+                        String steps =  dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString();
+                        double distance = Double.parseDouble(steps) / 1400;
+                        double roundedDistance = Math.floor(distance * 100) / 100;
+                        
+                        view.setText(String.format("%s Steps\nWooooooow!", steps));
+                        distanceView.setText(String.format("%s km", roundedDistance));
                     }
                 })
                 .addOnFailureListener(e -> {
