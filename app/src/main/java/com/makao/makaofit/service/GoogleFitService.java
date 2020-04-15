@@ -23,11 +23,11 @@ public class GoogleFitService {
 
     private final String TAG = "GoogleFitService";
     private final FitnessOptions fitnessOptions = FitnessOptions.builder()
-            .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-            .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
-            .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
-            .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
-            .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
             .build();
 
     public void setStepsCount(Context context, TextView view, TextView distance) {
@@ -77,7 +77,7 @@ public class GoogleFitService {
     }
 
     public void setCallories(Context context, TextView view) {
-        DataReadRequest dataReadRequest = createDataReadRequest(DataType.TYPE_CALORIES_EXPENDED);
+        DataReadRequest dataReadRequest = createDataReadCalloriesRequest();
 
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readData(dataReadRequest)
@@ -101,7 +101,7 @@ public class GoogleFitService {
         cal.setTime(now);
         cal.add(Calendar.MINUTE, 0);
         long endTime = cal.getTimeInMillis();
-        cal.add(Calendar.MINUTE, -50);
+        cal.add(Calendar.HOUR, -12);
         long startTime = cal.getTimeInMillis();
 
 
@@ -151,6 +151,14 @@ public class GoogleFitService {
 
     private DataReadRequest createDataReadRequest(DataType dataType) {
         Calendar cal = Calendar.getInstance();
+        return new DataReadRequest.Builder()
+                .read(dataType)
+                .setTimeRange(1, cal.getTimeInMillis(), TimeUnit.MILLISECONDS)
+                .build();
+    }
+    
+    private DataReadRequest createDataReadCalloriesRequest() {
+        Calendar cal = Calendar.getInstance();
         Date now = new Date();
         cal.setTime(now);
         cal.add(Calendar.MINUTE, 0);
@@ -159,7 +167,7 @@ public class GoogleFitService {
         long startTime = cal.getTimeInMillis();
 
         return new DataReadRequest.Builder()
-                .read(dataType)
+                .read(DataType.TYPE_CALORIES_EXPENDED)
                 .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
                 .build();
     }
