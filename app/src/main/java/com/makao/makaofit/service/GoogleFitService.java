@@ -24,7 +24,7 @@ public class GoogleFitService {
     private final String TAG = "GoogleFitService";
     private final FitnessOptions fitnessOptions = FitnessOptions.builder()
 //             .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-             .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
 //             .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
 //             .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
 //             .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
@@ -35,11 +35,10 @@ public class GoogleFitService {
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(dataReadResponse -> {
                     if (!dataReadResponse.isEmpty()) {
-                        String steps =  dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString();
+                        String steps = dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString();
                         double distance = Double.parseDouble(steps) / 1400;
                         double roundedDistance = Math.floor(distance * 100) / 100;
-                        
-                        view.setText(String.format("%s Steps\nWooooooow!", steps));
+                        view.setText(String.format("%s", steps));
                         distanceView.setText(String.format("%s km", roundedDistance));
                     }
                 })
@@ -167,9 +166,15 @@ public class GoogleFitService {
 
     private DataReadRequest createDataReadRequest(DataType dataType) {
         Calendar cal = Calendar.getInstance();
+        Date now = new Date();
+        cal.setTime(now);
+        cal.add(Calendar.MINUTE, 0);
+        long endTime = cal.getTimeInMillis();
+
         return new DataReadRequest.Builder()
                 .read(dataType)
-                .setTimeRange(1, cal.getTimeInMillis(), TimeUnit.MILLISECONDS)
+                .setTimeRange(1, endTime, TimeUnit.MILLISECONDS)
+                .setLimit(1)
                 .build();
     }
     
