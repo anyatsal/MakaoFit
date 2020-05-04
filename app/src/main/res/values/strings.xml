@@ -23,4 +23,8 @@
     <string name="kilometers">Km</string>
     <string name="kkal">Kkal</string>
     <string name="steps">Steps</string>
+    <string name="enter_your_weight">Enter your weight</string>
+    <string name="enter_your_height">Enter your height</string>
+    <string name="the_weight_is_incorrect">The weight is incorrect</string>
+    <string name="the_height_is_incorrect">The height is incorrect</string>
 </resources>

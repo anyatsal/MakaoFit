@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,16 +34,14 @@ public class EditProfileActivity extends AppCompatActivity {
         String height = heightView.getText().toString();
         String weight = weightView.getText().toString();
 
-        if (!isEmpty(height) || !isEmpty(weight)) {
-            if (isValid(height)) {
-                googleFitService.updateHeight(this, height);
-            }
-            if (isValid(weight)) {
-                googleFitService.updateWeight(this, weight);
-            }
-            finish();
-        } else {
-            Toast.makeText(this, "Although one field must be filled!", Toast.LENGTH_LONG).show();
+        if (isValid(height, true, findViewById(R.id.height_error))) {
+            findViewById(R.id.height_error).setVisibility(View.GONE);
+            googleFitService.updateHeight(this, height);
+        }
+
+        if (isValid(weight, false, findViewById(R.id.height_error))) {
+            findViewById(R.id.weight_error).setVisibility(View.GONE);
+            googleFitService.updateWeight(this, weight);
         }
     }
 
@@ -52,13 +51,27 @@ public class EditProfileActivity extends AppCompatActivity {
         finish();
     }
 
-    private boolean isValid(String temp) {
+    private boolean isValid(String temp, Boolean isHeight, TextView error) {
         if (!isEmpty(temp)) {
             try {
                 float var = Float.parseFloat(temp);
-                return true;
+                if (isHeight) {
+                    if (0.6 > var && var < 2.2) {
+                        return true;
+                    } else {
+                        error.setVisibility(View.VISIBLE);
+                        return false;
+                    }
+                } else {
+                    if (30 > var && var < 120) {
+                        return true;
+                    } else {
+                        error.setVisibility(View.VISIBLE);
+                        return false;
+                    }
+                }
             } catch (Exception e) {
-                heightView.setError("Not valid!");
+                error.setVisibility(View.VISIBLE);
                 return false;
             }
         }

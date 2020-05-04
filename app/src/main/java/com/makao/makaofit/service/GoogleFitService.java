@@ -98,7 +98,7 @@ public class GoogleFitService {
                             String callories = dataReadResponse.getDataSet(DataType.TYPE_CALORIES_EXPENDED).getDataPoints().get(0)
                                     .getValue(Field.FIELD_CALORIES).toString();
                             double kiloCall = Double.parseDouble(callories) * 30;
-                            Long roundedKilloCal = Math.round(kiloCall);
+                            Long roundedKilloCal = Math.round(kiloCall) / 1000;
                             view.setText(roundedKilloCal.toString() + " kCall");
                         }
                     } catch (Exception e) {
