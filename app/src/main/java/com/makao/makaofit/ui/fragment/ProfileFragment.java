@@ -62,7 +62,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initView(View view) {
-        TextView usernameView = view.findViewById(R.id.name);
         TextView nameView = view.findViewById(R.id.user_name);
         TextView emailView = view.findViewById(R.id.user_email);
         TextView heightView = view.findViewById(R.id.user_height);
@@ -70,7 +69,6 @@ public class ProfileFragment extends Fragment {
         ImageView photoView = view.findViewById(R.id.img_user_photo);
 
         nameView.setText(preferences.getString("username", ""));
-        usernameView.setText(preferences.getString("username", ""));
         emailView.setText(preferences.getString("email", ""));
 
         String photoUrl = preferences.getString("photoUrl", "");
