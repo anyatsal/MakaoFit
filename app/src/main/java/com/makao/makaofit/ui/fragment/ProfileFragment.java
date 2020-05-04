@@ -65,7 +65,6 @@ public class ProfileFragment extends Fragment {
         TextView usernameView = view.findViewById(R.id.name);
         TextView nameView = view.findViewById(R.id.user_name);
         TextView emailView = view.findViewById(R.id.user_email);
-        TextView birthdayView = view.findViewById(R.id.birthday);
         TextView heightView = view.findViewById(R.id.user_height);
         TextView weightView = view.findViewById(R.id.user_weight);
         ImageView photoView = view.findViewById(R.id.img_user_photo);

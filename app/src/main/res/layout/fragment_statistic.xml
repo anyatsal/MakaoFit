@@ -1,25 +1,394 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:weightSum="2">
 
-    <TextView
-        android:id="@+id/steps_count"
-        android:textSize="40sp"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content">
-    </TextView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/input_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/distance"
-        android:textSize="40sp"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content">
-    </TextView>
+        <TextView
+            android:id="@+id/title_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@string/current"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/current_titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_current">
+
+            <TextView
+                android:id="@+id/current_titles_steps"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/steps"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/current_titles_distance"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/kilometers"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/current_titles_kkal"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/kkal"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/current"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/current_titles">
+
+            <TextView
+                android:id="@+id/steps_current"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1427"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/distance_current"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0.2039"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/kkal_current"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="871"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/item_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/current" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/input_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_current">
+
+        <TextView
+            android:id="@+id/title_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@string/week"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/week_titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_week">
+
+            <TextView
+                android:id="@+id/week_titles_steps"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/steps"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/week_titles_distance"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/kilometers"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/week_titles_kkal"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/kkal"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/week_titles">
+
+            <TextView
+                android:id="@+id/steps_week"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="5703"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/distance_week"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="3.992"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/kkal_week"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="3213"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/item_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/week" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/input_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_week">
+
+        <TextView
+            android:id="@+id/title_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@string/month"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/month_titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_month">
+
+            <TextView
+                android:id="@+id/month_titles_steps"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/steps"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/month_titles_distance"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/kilometers"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/month_titles_kkal"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/kkal"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/month_titles">
+
+            <TextView
+                android:id="@+id/steps_month"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="8985"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/distance_month"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="5.041"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/kkal_month"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="4997"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <include
+            layout="@layout/item_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/month" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

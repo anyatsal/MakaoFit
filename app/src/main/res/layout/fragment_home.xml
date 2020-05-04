@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:background="@drawable/circle_shape"
-        android:text="Steps"
+        android:text="5709 steps"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +39,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            tools:text="440kkal" />
+            android:text="440kkal" />
 
         <TextView
             android:id="@+id/distance"
@@ -50,43 +51,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            tools:text="2.0km" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/weight_block"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_block">
-
-        <TextView
-            android:id="@+id/title_weight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="Weight"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/title_height"
-            app:layout_constraintTop_toBottomOf="@+id/steps"
-            tools:text="60kgs" />
+            android:text="2.0km" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,7 +63,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weight_block">
+        app:layout_constraintTop_toBottomOf="@+id/main_block">
 
         <TextView
             android:id="@+id/title_bmi"
@@ -123,7 +88,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/title_height"
             app:layout_constraintTop_toBottomOf="@+id/steps"
-            tools:text="22.5" />
+            android:text="22.5" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,18 +23,24 @@ public class GoogleFitService {
 
     private final String TAG = "GoogleFitService";
     private final FitnessOptions fitnessOptions = FitnessOptions.builder()
-            .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-            .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
-            .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+             .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
+//             .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
             .build();
 
-    public void setStepsCount(Context context, TextView view, TextView distance) {
+    public void setStepsCount(Context context, TextView view, TextView distanceView) {
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(dataReadResponse -> {
                     if (!dataReadResponse.isEmpty()) {
-                        view.setText(String.format("%s Steps\nWooooooow!", dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString()));
-                        distance.setText(String.format("%s km", (dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asFloat()/1400)));
+                        String steps =  dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString();
+                        double distance = Double.parseDouble(steps) / 1400;
+                        double roundedDistance = Math.floor(distance * 100) / 100;
+                        
+                        view.setText(String.format("%s Steps\nWooooooow!", steps));
+                        distanceView.setText(String.format("%s km", roundedDistance));
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -48,9 +54,13 @@ public class GoogleFitService {
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readData(dataReadRequest)
                 .addOnSuccessListener(dataReadResponse -> {
-                    if (dataReadResponse.getStatus().isSuccess()) {
-                        String weight = dataReadResponse.getDataSet(DataType.TYPE_WEIGHT).getDataPoints().get(0).getValue(Field.FIELD_WEIGHT).toString();
-                        view.setText(weight);
+                    try {
+                        if (dataReadResponse.getStatus().isSuccess()) {
+                            String weight = dataReadResponse.getDataSet(DataType.TYPE_WEIGHT).getDataPoints().get(0).getValue(Field.FIELD_WEIGHT).toString();
+                            view.setText(weight);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -64,9 +74,13 @@ public class GoogleFitService {
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readData(dataReadRequest)
                 .addOnSuccessListener(dataReadResponse -> {
-                    if (dataReadResponse.getStatus().isSuccess()) {
-                        String height = dataReadResponse.getDataSet(DataType.TYPE_HEIGHT).getDataPoints().get(0).getValue(Field.FIELD_HEIGHT).toString();
-                        view.setText(height);
+                    try {
+                        if (dataReadResponse.getStatus().isSuccess()) {
+                            String height = dataReadResponse.getDataSet(DataType.TYPE_HEIGHT).getDataPoints().get(0).getValue(Field.FIELD_HEIGHT).toString();
+                            view.setText(height);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -75,17 +89,21 @@ public class GoogleFitService {
     }
 
     public void setCallories(Context context, TextView view) {
-        DataReadRequest dataReadRequest = createDataReadRequest(DataType.TYPE_CALORIES_EXPENDED);
+        DataReadRequest dataReadRequest = createDataReadCalloriesRequest();
 
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readData(dataReadRequest)
                 .addOnSuccessListener(dataReadResponse -> {
-                    if(dataReadResponse.getStatus().isSuccess()) {
-                        String callories = dataReadResponse.getDataSet(DataType.TYPE_CALORIES_EXPENDED).getDataPoints().get(0)
-                                .getValue(Field.FIELD_CALORIES).toString();
-                        double kiloCall = Double.parseDouble(callories) * 30;
-                        Long roundedKilloCal = Math.round(kiloCall);
-                        view.setText(roundedKilloCal.toString() + " kCall");
+                    try {
+                        if (dataReadResponse.getStatus().isSuccess()) {
+                            String callories = dataReadResponse.getDataSet(DataType.TYPE_CALORIES_EXPENDED).getDataPoints().get(0)
+                                    .getValue(Field.FIELD_CALORIES).toString();
+                            double kiloCall = Double.parseDouble(callories) * 30;
+                            Long roundedKilloCal = Math.round(kiloCall);
+                            view.setText(roundedKilloCal.toString() + " kCall");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -99,7 +117,7 @@ public class GoogleFitService {
         cal.setTime(now);
         cal.add(Calendar.MINUTE, 0);
         long endTime = cal.getTimeInMillis();
-        cal.add(Calendar.MINUTE, -50);
+        cal.add(Calendar.HOUR, -12);
         long startTime = cal.getTimeInMillis();
 
 
@@ -149,6 +167,14 @@ public class GoogleFitService {
 
     private DataReadRequest createDataReadRequest(DataType dataType) {
         Calendar cal = Calendar.getInstance();
+        return new DataReadRequest.Builder()
+                .read(dataType)
+                .setTimeRange(1, cal.getTimeInMillis(), TimeUnit.MILLISECONDS)
+                .build();
+    }
+    
+    private DataReadRequest createDataReadCalloriesRequest() {
+        Calendar cal = Calendar.getInstance();
         Date now = new Date();
         cal.setTime(now);
         cal.add(Calendar.MINUTE, 0);
@@ -157,7 +183,7 @@ public class GoogleFitService {
         long startTime = cal.getTimeInMillis();
 
         return new DataReadRequest.Builder()
-                .read(dataType)
+                .read(DataType.TYPE_CALORIES_EXPENDED)
                 .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
                 .build();
     }
