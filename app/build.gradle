@@ -49,11 +49,18 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // Biometrics
-    implementation 'co.infinum:goldfinger:2.0.0-RC2'
+    implementation 'co.infinum:goldfinger:2.0.0'
 
     // Circle images
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.2.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.2.2"
+
+    // ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 }

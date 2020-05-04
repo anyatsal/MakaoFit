@@ -1,5 +1,6 @@
 package com.makao.makaofit.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void next() {
+        this.getSharedPreferences("com.makao.makaofit", Context.MODE_PRIVATE).edit().putBoolean("AUTHENTICATED", true).commit();
+
         Intent intent = new Intent(this, AppActivity.class);
         startActivity(intent);
         finish();

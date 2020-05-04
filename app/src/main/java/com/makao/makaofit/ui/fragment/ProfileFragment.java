@@ -1,5 +1,6 @@
 package com.makao.makaofit.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.makao.makaofit.R;
 import com.makao.makaofit.service.GoogleFitService;
+import com.makao.makaofit.ui.TutorialActivity;
 import com.makao.makaofit.ui.activity.EditProfileActivity;
 import com.makao.makaofit.ui.activity.MainActivity;
 import com.squareup.picasso.Picasso;
@@ -50,11 +52,13 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logout() {
+        getContext().getSharedPreferences("com.makao.makaofit", Context.MODE_PRIVATE).edit().putBoolean("AUTHENTICATED", false).commit();
+
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this.getActivity(), gso);
         mGoogleSignInClient.revokeAccess()
                 .addOnCompleteListener(this.getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Intent intent = new Intent(this.getActivity(), MainActivity.class);
+                        Intent intent = new Intent(this.getActivity(), TutorialActivity.class);
                         startActivity(intent);
                         getActivity().onBackPressed();
                     }

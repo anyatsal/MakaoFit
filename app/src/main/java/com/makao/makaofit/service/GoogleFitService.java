@@ -99,7 +99,7 @@ public class GoogleFitService {
                                     .getValue(Field.FIELD_CALORIES).toString();
                             double kiloCall = Double.parseDouble(callories) * 30;
                             Long roundedKilloCal = Math.round(kiloCall) / 1000;
-                            view.setText(roundedKilloCal.toString() + " kCall");
+                            view.setText(roundedKilloCal.toString() + " kcal");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

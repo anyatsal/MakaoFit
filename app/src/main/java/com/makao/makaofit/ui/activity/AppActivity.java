@@ -11,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.makao.makaofit.R;
 import com.makao.makaofit.ui.fragment.HomeFragment;
 import com.makao.makaofit.ui.fragment.ProfileFragment;
-import com.makao.makaofit.ui.fragment.SettingsFragment;
 import com.makao.makaofit.ui.fragment.StatisticsFragment;
 
 public class AppActivity extends AppCompatActivity {
@@ -33,9 +32,6 @@ public class AppActivity extends AppCompatActivity {
                             break;
                         case R.id.navigate_profile:
                             selectedFragment = ProfileFragment.newInstance();
-                            break;
-                        case R.id.navigate_settings:
-                            selectedFragment = SettingsFragment.newInstance();
                             break;
                     }
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
