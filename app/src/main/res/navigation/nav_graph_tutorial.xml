@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/tutorialFragment"
-        android:name="com.makao.makaofit.ui.TutorialFragment">
+        android:name="com.makao.makaofit.ui.training.TutorialFragment">
     </fragment>
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.makao.makaofit.ui
+package com.makao.makaofit.ui.training
 
 import android.os.Bundle
 import android.view.View

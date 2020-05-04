@@ -28,4 +28,5 @@
     <string name="the_weight_is_incorrect">The weight is incorrect</string>
     <string name="the_height_is_incorrect">The height is incorrect</string>
     <string name="skip">Skip</string>
+    <string name="goal">Goal</string>
 </resources>

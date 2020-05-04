@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:background="@drawable/circle_shape"
-        android:text="5709"
+        android:text="0"
         android:textSize="62sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="440 kcal" />
+            android:text="0 kcal" />
 
         <TextView
             android:id="@+id/distance"
@@ -51,7 +51,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="2.7 km" />
+            android:text="0 km" />
     </LinearLayout>
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.makao.makaofit.ui
+package com.makao.makaofit.ui.training
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.makao.makaofit.R
 import com.makao.makaofit.ui.activity.AppActivity
 import com.makao.makaofit.ui.activity.MainActivity
-import kotlinx.android.synthetic.main.activity_app.*
 import kotlinx.android.synthetic.main.fragment_tutorial.*
 import kotlinx.android.synthetic.main.fragment_tutorial.view.*
 

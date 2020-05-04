@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         googleFitService = new GoogleFitService();
         fitnessOptions = googleFitService.getFitnessOptions();
-        preferences = getSharedPreferences("info", MODE_PRIVATE);
+        preferences = getSharedPreferences("com.makao.makaofit", MODE_PRIVATE);
 
         if (oAuthPermissionApproved()) {
             next();

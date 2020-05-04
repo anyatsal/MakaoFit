@@ -1,4 +1,4 @@
-package com.makao.makaofit.ui
+package com.makao.makaofit.ui.training
 
 import android.view.LayoutInflater
 import android.view.View

@@ -35,7 +35,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".ui.TutorialActivity"
+        <activity android:name=".ui.training.TutorialActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme"
             tools:ignore="LockedOrientationActivity">
