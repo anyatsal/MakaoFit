@@ -29,3 +29,14 @@
 Для улучшения восприятия информации на странице Home будет после вычисления ИМТ будет выводиться категория массы тела. ([Улучшить внешний вид интерфейса Home](https://trello.com/c/gEOXU72J/15-%D1%83%D0%BB%D1%83%D1%87%D1%88%D0%B8%D1%82%D1%8C-%D0%B2%D0%BD%D0%B5%D1%88%D0%BD%D0%B8%D0%B9-%D0%B2%D0%B8%D0%B4-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B0-home))
 
 # Результаты
+## Обучение пользователя
+![1](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/1.jpg) 
+![2](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2.jpg) 
+![3](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3.jpg) 
+![4](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/4.jpg) 
+## Валидация данных при вводе роста и веса
+![2-1](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2-1.jpg) 
+![2-2](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2-2.jpg) 
+## Улучшить внешний вид интерфейса Home
+![3-1](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3-1.jpg) 
+![3-2](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3-2.jpg) 
