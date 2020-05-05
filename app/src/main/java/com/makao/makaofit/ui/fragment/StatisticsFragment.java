@@ -27,8 +27,9 @@ public class StatisticsFragment extends Fragment {
         GoogleFitService googleFitService = new GoogleFitService();
         try {
             TextView stepsCountView = view.findViewById(R.id.steps_current);
-            TextView distance = view.findViewById(R.id.distance_current);
-            googleFitService.setStepsCount(this.getContext(), stepsCountView, distance);
+            TextView distanceView = view.findViewById(R.id.distance_current);
+            TextView goalView = view.findViewById(R.id.goalView);
+            googleFitService.setStepsCount(this.getContext(), stepsCountView, distanceView, goalView);
         } catch (Exception e) {
             e.printStackTrace();
         }

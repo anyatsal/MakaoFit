@@ -30,16 +30,21 @@ public class GoogleFitService {
 //             .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
             .build();
 
-    public void setStepsCount(Context context, TextView view, TextView distanceView) {
+    public void setStepsCount(Context context, TextView view, TextView distanceView, TextView goalView) {
         Fitness.getHistoryClient(context, GoogleSignIn.getAccountForExtension(context, fitnessOptions))
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(dataReadResponse -> {
                     if (!dataReadResponse.isEmpty()) {
                         String steps = dataReadResponse.getDataPoints().get(0).getValue(Field.FIELD_STEPS).toString();
+                        int goal = context.getSharedPreferences("com.makao.makaofit", Context.MODE_PRIVATE).getInt("goal", 10000);
+
                         double distance = Double.parseDouble(steps) / 1400;
                         double roundedDistance = Math.floor(distance * 100) / 100;
+                        double progress = Double.parseDouble(steps) / goal * 100;
+
                         view.setText(String.format("%s", steps));
                         distanceView.setText(String.format("%s km", roundedDistance));
+                        goalView.setText(goal + "/" + progress + "%");
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -97,7 +102,7 @@ public class GoogleFitService {
                         if (dataReadResponse.getStatus().isSuccess()) {
                             String callories = dataReadResponse.getDataSet(DataType.TYPE_CALORIES_EXPENDED).getDataPoints().get(0)
                                     .getValue(Field.FIELD_CALORIES).toString();
-                            double kiloCall = Double.parseDouble(callories) * 30;
+                            double kiloCall = Double.parseDouble(callories) * 60;
                             Long roundedKilloCal = Math.round(kiloCall) / 1000;
                             view.setText(roundedKilloCal.toString() + " kcal");
                         }
