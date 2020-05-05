@@ -30,13 +30,8 @@
 
 # Результаты
 ## Обучение пользователя
-![1](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/1.jpg) 
-![2](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2.jpg) 
-![3](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3.jpg) 
-![4](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/4.jpg) 
-## Валидация данных при вводе роста и веса
-![2-1](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2-1.jpg) 
-![2-2](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2-2.jpg) 
-## Улучшить внешний вид интерфейса Home
-![3-1](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3-1.jpg) 
-![3-2](https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3-2.jpg) 
+<img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/1.jpg" width="200" > <img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2.jpg" width="200" > <img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3.jpg" width="200" > <img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/4.jpg" width="200" >  
+## Валидация данных при вводе роста и веса  
+<img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2-1.jpg" width="200" > <img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/2-2.jpg" width="200" >
+## Улучшить внешний вид интерфейса Home  
+<img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3-1.jpg" height="400" > <img src="https://github.com/anyatsal/MakaoFit/blob/master/ImprovementUX/3-2.jpg" height="400" >   
